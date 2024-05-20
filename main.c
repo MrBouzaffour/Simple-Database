@@ -95,6 +95,64 @@ void close_input_buffer(InputBuffer* input_buffer)
 		free(input_buffer -> buffer);
 		free(input_buffer);
 	}
+
+
+// indiacation success or failure (exceptions)
+typedef enum {
+	META_COMMAND_SUCCESS,
+	META_COMMAND_UNRECOGNIZED_COMMAND
+} MetaCommandResult;
+
+typedef enum { 
+	PREPARE_SUCCESS, 
+	PREPARE_UNRECOGNIZED_STATEMENT 
+} PrepareResult;
+
+
+MetaCommandResult do_meta_command(InputBuffer* input_buffer)
+{
+	if (strcmp(input_buffer->buffer, ".exit")==0)
+	{
+		exit(EXIT_SUCCESS);
+	}else
+	{
+		return META_COMMAND_UNRECOGNIZED_COMMAND;
+	}
+}
+typedef enum {
+	STATEMENT_INSERT,
+	STATEMENT_SELECT 
+} StatementType;
+
+typedef struct {
+	StatementType type;
+} Statement;
+
+
+// The sql compiler :)
+PrepareResult prepare_statement(InputBuffer* input_buffer, Statement* statement) {  
+	if (strncmp(input_buffer->buffer, "insert", 6) == 0) {
+		statement->type = STATEMENT_INSERT;
+		return PREPARE_SUCCESS;
+	}
+	if (strcmp(input_buffer->buffer, "select") == 0) {
+		statement->type = STATEMENT_SELECT;
+		return PREPARE_SUCCESS;
+	}
+
+	return PREPARE_UNRECOGNIZED_STATEMENT;
+	}
+
+void execute_statement(Statement* statement) {
+	switch (statement->type) {
+		case (STATEMENT_INSERT):
+			printf("This is where we would do an insert.\n");
+      			break;
+		case (STATEMENT_SELECT):
+			printf("This is where we would do a select.\n");
+			break;
+	}
+}
 int main(int argc, char* argv[]) {
 
 	(void)argc;
@@ -110,6 +168,8 @@ int main(int argc, char* argv[]) {
 		//	exit(EXIT_SUCCESS);}
 		//else{printf("Unrecognized command '%s' .\n",input_buffer->buffer);}
 	
+
+		//Non-SQL statements are called meta-commands like .exit
 		if (input_buffer->buffer[0] == '.')
 		{
 			switch (do_meta_command(input_buffer))
@@ -121,6 +181,9 @@ int main(int argc, char* argv[]) {
 					continue;
 			}
 		}
+
+
+		// we convert our input into an internal representation of a statement
 		Statement statement;
 		switch(prepare_statement(input_buffer, &statement))
 		{
@@ -130,6 +193,8 @@ int main(int argc, char* argv[]) {
 				printf("Unrecognized keyword at start of '%s' . \n",input_buffer->buffer);
 				continue;
 		}
+
+		// we execute out statement 
 		execute_statement(&statement);
 		printf("Executed.\n");
 	}
