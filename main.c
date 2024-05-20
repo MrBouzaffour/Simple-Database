@@ -1,12 +1,27 @@
 #include <stdbool.h>
 #include <stdio.h>
-	#include <stdlib.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 
 
 ssize_t custom_getline (char** lineptr, size_t* n, FILE* stream ) {
-	
+	/*
+	 * We tell getline to store the read line in input_buffer->buffer and the size of the allocated buffer in input_buffer->buffer_length.
+	 * We store the return value in input_buffer->input_length.
+	 *
+	 * buffer starts as null, so getline allocates enough memory to hold the line of input and makes buffer point to it.
+	 * 
+	 * Params:
+	 *	 lineptr : a pointer to the variable we use to point to the buffer containing the read line.
+	 *	 If it set to NULL it is mallocatted by getline and should thus be freed by the user, even if the command fails.
+	 *
+	 *	 n : a pointer to the variable we use to save the size of allocated buffer.
+	 *	 stream : the input stream to read from. We’ll be reading from standard input. 
+	 * 
+	 * return:
+	 * 	 value : the number of bytes read, which may be less than the size of the buffer.
+	 * */	
 	if (lineptr == NULL || n == NULL || stream == NULL) {
         	return -1;
     	}
@@ -68,7 +83,7 @@ void print_prompt(){ printf(" db > ");}
 void read_input(InputBuffer* input_buffer) {
 	 // ssize_t bytes_read = getline(&(input_buffer->buffer), &(input_buffer->buffer_length), stdin);
 	 ssize_t bytes_read = custom_getline(&(input_buffer->buffer), &(input_buffer->buffer_length), stdin);
-	if (bytes_read <= 0) {
+	 if (bytes_read <= 0) {
 		printf("Error reading input\n");
 		exit(EXIT_FAILURE);
 	 }
