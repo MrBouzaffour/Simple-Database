@@ -14,6 +14,8 @@
 
 int main(int argc, char* argv[]) {
     
+    Table* table = new_table();
+
     //creating an InputBuffer strucure
     InputBuffer* input_buffer = new_input_buffer();
     
@@ -48,14 +50,23 @@ int main(int argc, char* argv[]) {
         {
             case(PREPARE_SUCCESS):
                 break;
+
+            case (PREPARE_SYNTAX_ERROR):
+                printf("Syntax error. Could not parse statement.\n");
+                continue;
+
             case(PREPARE_UNRECOGNIZED_STATEMENT):
                 printf("Unrecognized keyword at start of '%s'.\n",input_buffer->buffer);
                 continue;
         }
 
-        // This is like our viritual machine
-        execute_statement(&statement);
-        printf("Executed. \n");
-
+        switch (execute_statement(&statement, table)) {
+            case (EXECUTE_SUCCESS):
+	            printf("Executed.\n");
+	            break;
+	        case (EXECUTE_TABLE_FULL):
+	            printf("Error: Table full.\n");
+	            break;
+        }
     }
 }

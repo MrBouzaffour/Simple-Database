@@ -7,7 +7,8 @@
 
 typedef enum { 
     PREPARE_SUCCESS,    // Statement recognized and prepared successfully.
-    PREPARE_UNRECOGNIZED_STATEMENT  //  Statement is unrecognized and cannot be prepared.
+    PREPARE_UNRECOGNIZED_STATEMENT,  //  Statement is unrecognized and cannot be prepared.
+    PREPARE_SYNTAX_ERROR    // There is a syntax errorr
 } PrepareResult;
 
 PrepareResult prepare_statement(InputBuffer* input_buffer, Statement* statement); // analyzes user input and initializes the `Statement` structure accordingly
