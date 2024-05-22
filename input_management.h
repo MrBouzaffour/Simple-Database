@@ -1,4 +1,3 @@
-
 #ifndef INPUT_MANAGEMENT_H
 #define INPUT_MANAGEMENT_H
 
@@ -7,13 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "inputbuffer_structure.h"
 
-
-typedef struct {
-    char* buffer;           // Pointer to the buffer that holds the input string.
-    size_t buffer_length;   // Size of the allocated memory for `buffer`.
-    ssize_t input_length;   // Length of the input stored in `buffer`.
-} InputBuffer;
 
 
 InputBuffer* new_input_buffer();    // Creating a new InputBuffer structure and initializes its properties.
