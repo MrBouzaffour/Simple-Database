@@ -2,7 +2,7 @@
 #include "command_processor.h"
 #include "statement_executor.h"
 #include "statement_preparer.h"
-#include "statements_structures.h"
+#include "statement_struct.h"
 #include "inputbuffer_structure.h"
 
 #include <stdbool.h>

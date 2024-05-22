@@ -5,8 +5,11 @@
 #include <stdio.h>
 #include "inputbuffer_structure.h"
 
-typedef enum { PREPARE_SUCCESS, PREPARE_UNRECOGNIZED_STATEMENT } PrepareResult;
+typedef enum { 
+    PREPARE_SUCCESS,    // Statement recognized and prepared successfully.
+    PREPARE_UNRECOGNIZED_STATEMENT  //  Statement is unrecognized and cannot be prepared.
+} PrepareResult;
 
-PrepareResult prepare_statement(InputBuffer* input_buffer, Statement* statement);
+PrepareResult prepare_statement(InputBuffer* input_buffer, Statement* statement); // analyzes user input and initializes the `Statement` structure accordingly
 
 #endif // STATEMENT_PREPARER_H
