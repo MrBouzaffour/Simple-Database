@@ -20,8 +20,5 @@ cd simple-database
 Usage
 
 To compile the project, run the following command from the root of the project directory:
-
-bash
-Copy code
 gcc -o db_program db.c command_processor.c input_management.c row_serialization.c statement_executor.c statement_preparer.c table.c -I.
 This will create an executable named db_program which you can run to interact with the database.
