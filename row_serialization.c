@@ -2,7 +2,7 @@
 #include <string.h> // memcpy
 
 void serialize_row(Row* source, void* destination) {
-    /*
+    /**
     * This function takes a source Row structure and copies each of its fields into
     * the destination memory block using the predefined offsets for each field.
     * The fields are copied in the order of their offsets: id, username, then email.
@@ -16,7 +16,7 @@ void serialize_row(Row* source, void* destination) {
 }
 
 void deserialize_row(void* source, Row* destination) {
-    /*
+    /**
     * This function reads data from a memory block (assumed to be a serialized Row)
     * and copies it into the corresponding fields of a destination Row structure.
     * The data is read from the memory block using the predefined offsets for each

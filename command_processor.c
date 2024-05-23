@@ -1,7 +1,7 @@
 #include "command_processor.h"
 
 MetaCommandResult do_meta_command(InputBuffer* input_buffer) {
-    /*
+    /**
     ** Meta-commands are commands that are not part of the SQL syntax but are used for controlling the application itself.
     * This function checks if the given input matches any known meta-commands.
     *

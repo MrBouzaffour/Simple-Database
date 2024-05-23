@@ -20,7 +20,7 @@ void print_prompt() { printf("db > "); }
 
 
 void read_input(InputBuffer* input_buffer) {
-    /*
+    /**
     *   This function reads a line of input from the standard input (stdin)
     *   and store it into an InputBuffer structure.
     *   @param InputBuffer* input_buffer : A pointer to an InputBuffer instance where the input will be stored.
