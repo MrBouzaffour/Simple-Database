@@ -17,6 +17,8 @@ typedef struct
     char email[COLUMN_EMAIL_SIZE];          // Buffer for storing the email, fixed length.
 } Row;
 
+void print_row(Row* row);   // Prints the contents of a Row structure
+
 /* ------ Row Layout ------ */
 
 // Macro to calculate the size of a specific attribute within a structure

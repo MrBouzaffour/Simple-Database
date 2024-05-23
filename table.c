@@ -1,6 +1,6 @@
 #include "table.h"
 #include <stdlib.h> 
-
+#include <stdio.h>
 const uint32_t ID_SIZE = size_of_attribute(Row, id);
 const uint32_t USERNAME_SIZE = size_of_attribute(Row, username);
 const uint32_t EMAIL_SIZE = size_of_attribute(Row, email);
@@ -42,7 +42,10 @@ void* row_slot(Table* table, uint32_t row_num) {
     return page + byte_offset;  // Return the pointer to the row's slot
 }
 
-
+void print_row(Row* row) {
+    /* Prints the contents of a Row structure */
+    printf("(%d, %s, %s)\n", row->id, row->username, row->email);
+}
 Table* new_table() {
     /**
     *   Creates a new empty Table structure.
