@@ -18,9 +18,12 @@ Clone the repository to your local machine:
 ```bash
 git clone https://github.com/yourusername/simple-database.git
 cd simple-database
-Usage
+```
+## Usage
 
 To compile the project, run the following command from the root of the project directory:
+```bash
 gcc -o db_program db.c command_processor.c input_management.c row_serialization.c statement_executor.c statement_preparer.c table.c -I.
-This will create an executable named db_program which you can run to interact with the database.
 ```
+This will create an executable named db_program which you can run to interact with the database.
+
