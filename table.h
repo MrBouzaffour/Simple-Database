@@ -13,8 +13,8 @@
 typedef struct
 {
     uint32_t id;                            // Unique identifier for the row.
-    char username[COLUMN_USERNAME_SIZE];    // Buffer for storing the username, fixed length.
-    char email[COLUMN_EMAIL_SIZE];          // Buffer for storing the email, fixed length.
+    char username[COLUMN_USERNAME_SIZE + 1];    // Buffer for storing the username, fixed length.
+    char email[COLUMN_EMAIL_SIZE +1 ];          // Buffer for storing the email, fixed length.
 } Row;
 
 void print_row(Row* row);   // Prints the contents of a Row structure
