@@ -1,7 +1,7 @@
 #ifndef STATEMENT_STRUCT_H
 #define STATEMENT_STRUCT_H
 
-#include "row.h"
+#include "table.h"
 
 typedef enum {
     STATEMENT_INSERT,   // SQL INSERT operation.

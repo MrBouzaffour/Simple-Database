@@ -4,7 +4,7 @@
 #include "statement_preparer.h"
 #include "statement_struct.h"
 #include "inputbuffer_structure.h"
-
+#include "table.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +13,6 @@
 
 
 int main(int argc, char* argv[]) {
-    
     Table* table = new_table();
 
     //creating an InputBuffer strucure

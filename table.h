@@ -1,14 +1,47 @@
 #ifndef TABLE_H
 #define TABLE_H
 
-#include "row_layout.h"
+#include <stdint.h>
+
+
+
+/* ------ Row ------ */
+
+#define COLUMN_USERNAME_SIZE 32 // Maximum length of username string
+#define COLUMN_EMAIL_SIZE 255   // Maximum length of email string
+
+
+// Row structure
+typedef struct
+{
+    uint32_t id;    // Unique identifier for the row.
+    char username[COLUMN_USERNAME_SIZE];    // Buffer for storing the username, fixed length.
+    char email[COLUMN_EMAIL_SIZE];      // Buffer for storing the email, fixed length.
+} Row;
+
+/* ------ Row Layout ------ */
+
+// Macro to calculate the size of a specific attribute within a structure
+// Utilizes the offset of structure pointer technique for portability
+#define size_of_attribute(Struct, Attribute) sizeof(((Struct*)0)->Attribute)
+
+extern const uint32_t ID_SIZE;
+extern const uint32_t USERNAME_SIZE;
+extern const uint32_t EMAIL_SIZE;
+
+extern const uint32_t ID_OFFSET;
+extern const uint32_t USERNAME_OFFSET;
+extern const uint32_t EMAIL_OFFSET;
+
+extern const uint32_t ROW_SIZE;
+
+/* ------ Table ------ */
 
 // Define page size and table constraints
-#define TABLE_MAX_PAGES 100     // Maximum number of pages in a table
-const uint32_t PAGE_SIZE = 4096;    // Page size in bytes
-const uint32_t ROWS_PER_PAGE = PAGE_SIZE / ROW_SIZE; // Number of rows per page
-const uint32_t TABLE_MAX_ROWS = ROWS_PER_PAGE * TABLE_MAX_PAGES; // Max rows in the table
-
+#define TABLE_MAX_PAGES 100
+#define PAGE_SIZE 4096
+#define ROWS_PER_PAGE (PAGE_SIZE / ROW_SIZE)
+#define TABLE_MAX_ROWS (ROWS_PER_PAGE * TABLE_MAX_PAGES)
 
 // Table structure which holds all rows organized in pages.
 typedef struct {

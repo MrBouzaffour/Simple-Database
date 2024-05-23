@@ -1,4 +1,3 @@
-// row_serialization.c
 #include "row_serialization.h"
 #include <string.h> // memcpy
 
