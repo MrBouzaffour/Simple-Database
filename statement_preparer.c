@@ -31,7 +31,20 @@ PrepareResult prepare_statement(InputBuffer* input_buffer, Statement* statement)
         return PREPARE_SUCCESS;
         }
   
-    if (strcmp(input_buffer->buffer, "select") == 0) {
+    if (strncmp(input_buffer->buffer, "select", 6) == 0) {
+        
+        char* str = input_buffer->buffer;
+        str+=7;
+        if (*str == '*')
+        {
+            str++;
+            if (*str == '\0')
+            {
+                statement->type = STATEMENT_SELECT_ALL;
+                return PREPARE_SUCCESS;
+            }
+            return PREPARE_SYNTAX_ERROR;
+        }
         statement->type = STATEMENT_SELECT;
         return PREPARE_SUCCESS;
     }

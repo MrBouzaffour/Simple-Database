@@ -72,8 +72,10 @@ ExecuteResult execute_statement(Statement* statement, Table* table) {
         case (STATEMENT_INSERT):
             return execute_insert(statement, table);
 
-        case (STATEMENT_SELECT):
+        case (STATEMENT_SELECT_ALL):
             return execute_select(statement, table);
+        case (STATEMENT_SELECT):
+            printf("select only");
 
   }
 }

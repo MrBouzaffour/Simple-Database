@@ -5,7 +5,8 @@
 
 typedef enum {
     STATEMENT_INSERT,   // SQL INSERT operation.
-    STATEMENT_SELECT    // SQL SELECT operation.
+    STATEMENT_SELECT,    // SQL SELECT operation.
+    STATEMENT_SELECT_ALL
 } StatementType;
 
 typedef struct {
