@@ -13,6 +13,7 @@
 
 
 int main(int argc, char* argv[]) {
+    // Create an empty table
     Table* table = new_table();
 
     //creating an InputBuffer strucure
