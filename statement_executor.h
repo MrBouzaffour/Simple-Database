@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include "statement_struct.h"
-#include "table.h"
+//#include "table.h"
 #include "row_serialization.h"
 
 // Enum to define possible results of statement execution

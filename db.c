@@ -4,7 +4,8 @@
 #include "statement_preparer.h"
 #include "statement_struct.h"
 #include "inputbuffer_structure.h"
-#include "table.h"
+//#include "table.h"
+#include "database.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,7 +15,11 @@
 
 int main(int argc, char* argv[]) {
     // Create an empty table
-    Table* table = new_table();
+    //Table* table = new_table();
+
+    // Create a database instance to manage multiple tables
+    Database db;
+    init_database(&db);  // Initialize the database with no tables
 
     //creating an InputBuffer strucure
     InputBuffer* input_buffer = new_input_buffer();
@@ -46,7 +51,7 @@ int main(int argc, char* argv[]) {
 
         // Converting the line of input into our internal representation of a statement
         Statement statement;
-        switch ( prepare_statement(input_buffer, &statement))
+        switch ( prepare_statement(input_buffer, &statement, &db))
         {
             case(PREPARE_SUCCESS):
                 break;
@@ -60,7 +65,7 @@ int main(int argc, char* argv[]) {
                 continue;
         }
 
-        switch (execute_statement(&statement, table)) {
+        switch (execute_statement(&statement, &db)) {
             case (EXECUTE_SUCCESS):
 	            printf("Executed.\n");
 	            break;
