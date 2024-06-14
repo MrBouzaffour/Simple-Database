@@ -50,7 +50,7 @@ PrepareResult prepare_statement(InputBuffer* input_buffer, Statement* statement)
         statement->type = STATEMENT_SELECT;
         int args_assigned = sscanf(input_buffer->buffer,"select %d %s %s",&(statement->row_selected.id),statement->row_selected.username,statement->row_selected.email);
         
-        if(args_assigned > 3)
+        if(args_assigned ==0)
         {
             return PREPARE_SYNTAX_ERROR;
         }

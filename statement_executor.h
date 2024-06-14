@@ -9,7 +9,8 @@
 // Enum to define possible results of statement execution
 typedef enum {
     EXECUTE_SUCCESS,    // Execution was successful
-    EXECUTE_TABLE_FULL  // The table has no free space for more rows
+    EXECUTE_TABLE_FULL,  // The table has no free space for more rows
+    NOT_FOUND
 } ExecuteResult;
 
 ExecuteResult execute_insert(Statement* statement, Table* table);       // execute an insert statement

@@ -67,6 +67,8 @@ int main(int argc, char* argv[]) {
 	        case (EXECUTE_TABLE_FULL):
 	            printf("Error: Table full.\n");
 	            break;
+            case (NOT_FOUND):
+                printf("Error: Data Not found.\n");
         }
     }
 }

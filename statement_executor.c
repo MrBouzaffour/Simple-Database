@@ -88,6 +88,7 @@ ExecuteResult execute_select(Statement* statement, Table* table) {
     }
     if (found == 1)
     {return EXECUTE_SUCCESS;}
+    return NOT_FOUND;
 
 }
 
