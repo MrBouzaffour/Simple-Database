@@ -31,7 +31,7 @@ ExecuteResult execute_insert(Statement* statement, Table* table) {
 }
 
 
-ExecuteResult execute_select(Statement* statement, Table* table) {
+ExecuteResult execute_select_all(Statement* statement, Table* table) {
     /**
     * This function iterates through all rows in a specified Table and deserializes each row from its 
     * respective storage slot into a temporary Row structure. Each row is then printed. The operation 
@@ -58,6 +58,38 @@ ExecuteResult execute_select(Statement* statement, Table* table) {
     return EXECUTE_SUCCESS;
 }
 
+ExecuteResult execute_select(Statement* statement, Table* table) {
+    /**
+    * This function iterates through all rows in a specified Table and deserializes each row from its 
+    * respective storage slot into a temporary Row structure. Each row is then printed. The operation 
+    * continues until all rows have been processed. If successful, the function returns EXECUTE_SUCCESS.
+    *
+    * @param statement A pointer to a Statement structure
+    * @param table A pointer to the Table from which rows will be selected and printed
+    * @return An ExecuteResult indicating the success of the operation
+    */
+
+    
+    Row row; // temporary storage for each deserialized row
+    Row* row_selected = &(statement->row_selected);
+    int found = 0;
+    // Iterate over each row in the table
+    for (uint32_t i = 0; i < table->num_rows; i++) {
+        
+        // Deserialize the row data from the appropriate slot in the table into 'row'
+        deserialize_row(row_slot(table, i), &row);
+        int32_t _id = row.id;
+
+        if (_id == row_selected->id)
+        {
+            print_row(&row);
+            found = 1;
+        }
+    }
+    if (found == 1)
+    {return EXECUTE_SUCCESS;}
+
+}
 
 ExecuteResult execute_statement(Statement* statement, Table* table) {
     /**
@@ -71,11 +103,10 @@ ExecuteResult execute_statement(Statement* statement, Table* table) {
     switch (statement->type) {
         case (STATEMENT_INSERT):
             return execute_insert(statement, table);
-
         case (STATEMENT_SELECT_ALL):
-            return execute_select(statement, table);
+            return execute_select_all(statement, table);
         case (STATEMENT_SELECT):
-            printf("select only");
+            return execute_select(statement, table);
 
   }
 }

@@ -12,7 +12,7 @@ typedef enum {
 typedef struct {
     StatementType type; // type of the SQL statement, defined by StatementType enum.
     Row row_to_insert;  // only used by insert statement
-
+    Row row_selected;   // only used for select and it will be changed in the future
 } Statement;
 
 #endif // STATEMENT_STRUCT_H

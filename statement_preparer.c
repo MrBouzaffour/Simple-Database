@@ -33,8 +33,9 @@ PrepareResult prepare_statement(InputBuffer* input_buffer, Statement* statement)
   
     if (strncmp(input_buffer->buffer, "select", 6) == 0) {
         
+        //-- If we want to select all --//
         char* str = input_buffer->buffer;
-        str+=7;
+        str+=7; // we will point to the character of after 'select'
         if (*str == '*')
         {
             str++;
@@ -45,7 +46,15 @@ PrepareResult prepare_statement(InputBuffer* input_buffer, Statement* statement)
             }
             return PREPARE_SYNTAX_ERROR;
         }
+        //-- select by id --//
         statement->type = STATEMENT_SELECT;
+        int args_assigned = sscanf(input_buffer->buffer,"select %d %s %s",&(statement->row_selected.id),statement->row_selected.username,statement->row_selected.email);
+        
+        if(args_assigned > 3)
+        {
+            return PREPARE_SYNTAX_ERROR;
+        }
+        
         return PREPARE_SUCCESS;
     }
     return PREPARE_UNRECOGNIZED_STATEMENT;
